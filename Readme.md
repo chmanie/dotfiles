@@ -2,7 +2,7 @@
 
 ```
 mkdir -p ~/dev
-git clone git@github.com:chmanie/dotfiles.git ~/dev/dotfile
+git clone git@github.com:chmanie/dotfiles.git --recursive ~/dev/dotfile
 ```
 
 ## Mac
