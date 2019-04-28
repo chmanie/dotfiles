@@ -12,8 +12,8 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 export NVM_DIR="$HOME/.nvm"
 alias loadnvm='[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
 
-# opam
-. ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# Disable the super annoying CTRL+D logout
+setopt IGNORE_EOF
 
 # custom aliases
 alias serve='budo'
@@ -44,8 +44,6 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # FZF settings
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Super fast fzf search using fd!
