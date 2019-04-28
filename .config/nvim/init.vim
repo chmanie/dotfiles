@@ -14,7 +14,8 @@ Plug 'w0rp/ale'
 " Color schemes
 "Plug 'mhartington/oceanic-next'
 " Plug 'morhetz/gruvbox'
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
+Plug 'whatyouhide/vim-gotham'
 " status bar
 Plug 'itchyny/lightline.vim'
 " Show git branch
@@ -161,7 +162,8 @@ endif
 
 " colorscheme OceanicNext
 " colorscheme gruvbox
-colorscheme dracula
+" colorscheme dracula
+colorscheme gotham
 
 " Operator mono adjustments
 hi htmlArg gui=italic
@@ -192,7 +194,7 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
   \ },
-  \ 'colorscheme': 'one',
+  \ 'colorscheme': 'gotham',
   \ 'component_function': {
   \   'gitbranch': 'gitbranch#name'
   \ },
