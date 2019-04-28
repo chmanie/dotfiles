@@ -1,3 +1,18 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule ".zplugins/zsh-history-substring-search"]
+	path = .zplugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule ".zplugins/fast-syntax-highlighting"]
+	path = .zplugins/fast-syntax-highlighting
+	url = https://github.com/zdharma/fast-syntax-highlighting.git
+[submodule ".zplugins/zimfw"]
+	path = .zplugins/zimfw
+	url = https://github.com/zimfw/zimfw.git
+[submodule ".zplugins/zsh-async"]
+	path = .zplugins/zsh-async
+	url = https://github.com/mafredri/zsh-async.git
+[submodule ".zplugins/pure"]
+	path = .zplugins/pure
+	url = https://github.com/sindresorhus/pure.git

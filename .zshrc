@@ -2,11 +2,12 @@
 # User configuration sourced by interactive shells
 #
 
-# Change default zim location
-export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-
-# Start zim
-[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
+### Plugins ###
+source "$HOME/.zplugins/zsh-async/async.plugin.zsh"
+source "$HOME/.zplugins/pure/pure.zsh"
+source "$HOME/.zplugins/zimfw/modules/history/init.zsh"
+source "$HOME/.zplugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOME/.zplugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -19,7 +20,7 @@ setopt IGNORE_EOF
 alias serve='budo'
 # git
 alias gst='git status --short'
-alias gd='gwd'
+alias gd='git diff'
 alias glog='git log --oneline --decorate --color --graph'
 
 [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
@@ -45,6 +46,10 @@ export LANGUAGE=en_US.UTF-8
 
 # FZF settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Up/down history search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Super fast fzf search using fd!
 export FZF_DEFAULT_COMMAND='fd --type file --color=always'
