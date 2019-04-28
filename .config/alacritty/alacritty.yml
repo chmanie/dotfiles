@@ -228,10 +228,12 @@ colors:
   # Normal colors
   normal:
     black: '0x0a0f14'
-    red: '0xc33027'
+    # I like this red better
+    red: '0xf9436f'
+    #red: '0xc33027'
     green: '0x26a98b'
     yellow: '0xedb54b'
-    #Because the default blue color is pretty much unreadable
+    # Because the default blue color is pretty much unreadable
     #blue: '0x195465'
     blue: '0x33859d'
     magenta: '0x4e5165'
@@ -244,7 +246,7 @@ colors:
     red: '0xd26939'
     green: '0x081f2d'
     yellow: '0x245361'
-    #Because the default blue color is pretty much unreadable
+    # Because the default blue color is pretty much unreadable
     #blue: '0x093748'
     blue: '0x599caa'
     magenta: '0x888ba5'
