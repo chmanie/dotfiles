@@ -6,6 +6,7 @@
 source "$HOME/.zplugins/zsh-async/async.plugin.zsh"
 source "$HOME/.zplugins/pure/pure.zsh"
 source "$HOME/.zplugins/zimfw/modules/history/init.zsh"
+source "$HOME/.zplugins/zimfw/modules/git/init.zsh"
 source "$HOME/.zplugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 source "$HOME/.zplugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh"
 
@@ -18,10 +19,10 @@ setopt IGNORE_EOF
 
 # custom aliases
 alias serve='budo'
-# git
-alias gst='git status --short'
+# git habit adjustments
+alias gst='gws'
 alias gd='git diff'
-alias glog='git log --oneline --decorate --color --graph'
+alias glog='glG'
 
 [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
 if [ -S  ]; then
