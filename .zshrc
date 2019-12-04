@@ -36,7 +36,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 ## emoji (alpha)
-source "$HOME/dev/bash/emoji-in-the-shell/emoji-in-the-shell.zsh"
+# source "$HOME/dev/bash/emoji-in-the-shell/emoji-in-the-shell.zsh"
 
 ### Settings ###
 
@@ -90,7 +90,7 @@ alias ypl="yarn --pure-lockfile"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-alias loadnvm='[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"'
+alias loadnvm='[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
 
 # path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH:/usr/local/sbin:$PATH"
