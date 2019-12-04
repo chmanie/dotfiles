@@ -12,22 +12,35 @@ Plug 'christoomey/vim-tmux-navigator'
 " Code formatters and linters
 Plug 'w0rp/ale'
 " Color schemes
-"Plug 'mhartington/oceanic-next'
+" Plug 'mhartington/oceanic-next'
+" let g:gruvbox_contrast_dark = 'hard'
 " Plug 'morhetz/gruvbox'
-" Plug 'dracula/vim'
-Plug 'whatyouhide/vim-gotham'
+Plug 'cocopon/iceberg.vim'
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'whatyouhide/vim-gotham'
+" Plug 'reewr/vim-monokai-phoenix'
 " status bar
 Plug 'itchyny/lightline.vim'
 " Show git branch
 Plug 'itchyny/vim-gitbranch'
 " JavaScript language stuff
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript' 
-Plug 'mxw/vim-jsx'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 " Not really a plugin byt fzf
 Plug '/usr/local/opt/fzf'
 Plug 'chmanie/fzf.vim'
 " Auto close parens
-Plug 'cohama/lexima.vim'
+" Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+" Add comments using gcc and gc
+Plug 'tpope/vim-commentary'
+" Open marked (macOS only)
+Plug 'itspriddle/vim-marked'
+" PlatformIO
+Plug 'meck/ale-platformio'
 
 call plug#end()
 
@@ -56,7 +69,7 @@ set encoding=utf-8
 
 " Whitespace
 set wrap
-set textwidth=79
+" set textwidth=80
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -109,9 +122,6 @@ vnoremap <F1> :set invfullscreen<CR>
 
 " Formatting
 map <leader>q gqip
-" Easy commenting of lines
-noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -121,7 +131,7 @@ set listchars=tab:▸\ ,eol:¬
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Use mac os clipboard for yanking
-set clipboard=unnamed
+" set clipboard=unnamed
 " Use '' in visual mode to copy stuff to the mac clipboard
 " vmap '' :w !pbcopy<CR><CR>
 
@@ -152,6 +162,8 @@ let g:netrw_altv=1
 let g:netrw_winsize=25
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^|\s\s)\zs\.\S+'
+" Deal with annoying netrws not closing
+autocmd FileType netrw setl bufhidden=delete
 
 " Color scheme (terminal)
 if (has("termguicolors"))
@@ -162,8 +174,10 @@ endif
 
 " colorscheme OceanicNext
 " colorscheme gruvbox
+colorscheme iceberg
 " colorscheme dracula
-colorscheme gotham
+" colorscheme gotham
+" colorscheme monokai-phoenix
 
 " Operator mono adjustments
 hi htmlArg gui=italic
@@ -182,8 +196,8 @@ nnoremap \ :Find<Space>
 " Relative path autocompletion with fzf and fd (fantastic!)
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path_relative('fd')
 
-" gruvbox
-" let g:gruvbox_contrast_dark = 'hard'
+" Find + replace project wide (requires fr function)
+nnoremap \| :!fr<Space>
 
 " vim-javascript
 let g:javascript_plugin_flow = 1
@@ -194,7 +208,7 @@ let g:lightline = {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
   \ },
-  \ 'colorscheme': 'gotham',
+  \ 'colorscheme': 'iceberg',
   \ 'component_function': {
   \   'gitbranch': 'gitbranch#name'
   \ },
@@ -203,5 +217,8 @@ let g:lightline = {
 " ALE
 map <leader>g :ALEGoToDefinition<CR>
 map <leader>f :ALEFix<CR>
+map <leader>h :ALEHover<CR>
+map <leader>r :ALEFindReferences<CR>
+inoremap <silent> <C-X><C-O> <C-\><C-O>:ALEComplete<CR>
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1

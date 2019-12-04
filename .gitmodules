@@ -16,3 +16,9 @@
 [submodule ".zplugins/pure"]
 	path = .zplugins/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule ".zplugins/zsh-completions"]
+	path = .zplugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule ".zplugins/zsh-autosuggestions"]
+	path = .zplugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
