@@ -11,11 +11,14 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'christoomey/vim-tmux-navigator'  
 " Code formatters and linters
 Plug 'w0rp/ale'
+" Completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Color schemes
 " Plug 'mhartington/oceanic-next'
 " let g:gruvbox_contrast_dark = 'hard'
 " Plug 'morhetz/gruvbox'
 Plug 'cocopon/iceberg.vim'
+" Plug 'haishanh/night-owl.vim'
 " Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'reewr/vim-monokai-phoenix'
@@ -23,24 +26,33 @@ Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 " Show git branch
 Plug 'itchyny/vim-gitbranch'
+" Plug 'tpope/vim-fugitive'
 " JavaScript language stuff
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript' 
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
-" Not really a plugin byt fzf
+Plug 'HerringtonDarkholme/yats.vim'
+" File exploring
 Plug '/usr/local/opt/fzf'
 Plug 'chmanie/fzf.vim'
+Plug 'tpope/vim-vinegar'
+" Plug 'mcchrish/nnn.vim'
 " Auto close parens
 " Plug 'cohama/lexima.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 " Add comments using gcc and gc
 Plug 'tpope/vim-commentary'
+Plug 'suy/vim-context-commentstring'
 " Open marked (macOS only)
 Plug 'itspriddle/vim-marked'
+" Paste images from clipboard into markdown
+Plug 'ferrine/md-img-paste.vim'
 " PlatformIO
-Plug 'meck/ale-platformio'
+" Plug 'meck/ale-platformio'
+" Plug 'm-pilia/vim-ccls'
+" Color CSS colors
+Plug 'chrisbra/Colorizer'
 
 call plug#end()
 
@@ -66,6 +78,11 @@ set visualbell
 
 " Encoding
 set encoding=utf-8
+
+" Always draw the signcolumn.
+" set signcolumn=yes
+
+set cmdheight=2
 
 " Whitespace
 set wrap
@@ -97,6 +114,9 @@ au FocusGained,BufEnter * :silent! !
 
 " Rendering
 set ttyfast
+
+" Regex engine
+set re=2
 
 " Status bar
 set laststatus=2
@@ -153,22 +173,19 @@ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-h
 set grepprg=rg\ --vimgrep
 
 " FILE BROWSING
-
-let g:netrw_localrmdir="rm -r" " Be able to delete non-emtpy directories
-" let g:netrw_banner=0 " Disable banner
-" let g:netrw_browse_split=4 " Open in prior window
-let g:netrw_liststyle=3 " Tree view
-let g:netrw_altv=1
-let g:netrw_winsize=25
+" Freed <C-l> in Netrw
+nmap <leader><leader>l <Plug>NetrwRefresh 
+" Be able to delete non-emtpy directories
+let g:netrw_localrmdir="rm -r" 
+" Hide files ignored by git
 let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^|\s\s)\zs\.\S+'
-" Deal with annoying netrws not closing
-autocmd FileType netrw setl bufhidden=delete
+" Conveniently open netrw
+nnoremap <C-_> :Ex<CR>
 
 " Color scheme (terminal)
-if (has("termguicolors"))
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
@@ -178,6 +195,7 @@ colorscheme iceberg
 " colorscheme dracula
 " colorscheme gotham
 " colorscheme monokai-phoenix
+" colorscheme night-owl
 
 " Operator mono adjustments
 hi htmlArg gui=italic
@@ -189,9 +207,9 @@ hi Type    cterm=italic
 
 " Plugin config
 
-" fzf keybinding
-map <C-p> :Files<CR>
-map <C-n> :Buffers<CR>
+" fzf keybindings
+nnoremap <C-p> :Files<CR>
+nnoremap <C-n> :Buffers<CR>
 nnoremap \ :Find<Space>
 " Relative path autocompletion with fzf and fd (fantastic!)
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path_relative('fd')
@@ -199,8 +217,11 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path_relative('fd')
 " Find + replace project wide (requires fr function)
 nnoremap \| :!fr<Space>
 
-" vim-javascript
-let g:javascript_plugin_flow = 1
+" Type // in visual mode to find text that is selected
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 " lightline
 let g:lightline = {
@@ -222,3 +243,14 @@ map <leader>r :ALEFindReferences<CR>
 inoremap <silent> <C-X><C-O> <C-\><C-O>:ALEComplete<CR>
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
+let g:ale_cpp_ccls_init_options = {
+\   'cache': {
+\       'directory': '/tmp/ccls/cache'
+\   }
+\ }
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 1
+
+" md-img-paste.vim keybindings
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+let g:mdip_imgdir = 'img'
