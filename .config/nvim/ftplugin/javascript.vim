@@ -1,3 +1,2 @@
-let b:ale_linters_ignore = ['tsserver']
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-
+" Use leader-f to format
+nnoremap <silent><leader>f :CocCommand eslint.executeAutofix<CR>

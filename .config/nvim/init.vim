@@ -9,36 +9,29 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Properly navigate splits when in tmux
 Plug 'christoomey/vim-tmux-navigator'  
-" Code formatters and linters
-Plug 'w0rp/ale'
-" Completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Color schemes
-" Plug 'mhartington/oceanic-next'
-" let g:gruvbox_contrast_dark = 'hard'
-" Plug 'morhetz/gruvbox'
 Plug 'cocopon/iceberg.vim'
-" Plug 'haishanh/night-owl.vim'
-" Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'whatyouhide/vim-gotham'
-" Plug 'reewr/vim-monokai-phoenix'
 " status bar
 Plug 'itchyny/lightline.vim'
 " Show git branch
-Plug 'itchyny/vim-gitbranch'
-" Plug 'tpope/vim-fugitive'
-" JavaScript language stuff
+" Plug 'itchyny/vim-gitbranch'
+" Language stuff
 Plug 'pangloss/vim-javascript' 
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'vim-syntastic/syntastic'
+" Language server
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Debugging
+Plug 'chmanie/termdebugx.nvim'
 " File exploring
 Plug '/usr/local/opt/fzf'
 Plug 'chmanie/fzf.vim'
 Plug 'tpope/vim-vinegar'
-" Plug 'mcchrish/nnn.vim'
 " Auto close parens
-" Plug 'cohama/lexima.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 " Add comments using gcc and gc
@@ -48,9 +41,6 @@ Plug 'suy/vim-context-commentstring'
 Plug 'itspriddle/vim-marked'
 " Paste images from clipboard into markdown
 Plug 'ferrine/md-img-paste.vim'
-" PlatformIO
-" Plug 'meck/ale-platformio'
-" Plug 'm-pilia/vim-ccls'
 " Color CSS colors
 Plug 'chrisbra/Colorizer'
 
@@ -79,10 +69,24 @@ set visualbell
 " Encoding
 set encoding=utf-8
 
-" Always draw the signcolumn.
-" set signcolumn=yes
+" coc.nvim: Some servers have issues with backup files, see #649.
+" Consider turning that on if it works
+set nobackup
+set nowritebackup
 
-set cmdheight=2
+" Give more space for displaying messages.
+" set cmdheight=2
+
+" Always draw the signcolumn (merged with number column)
+" set signcolumn=number
+set signcolumn=yes
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
 " Whitespace
 set wrap
@@ -189,13 +193,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" colorscheme OceanicNext
-" colorscheme gruvbox
 colorscheme iceberg
-" colorscheme dracula
-" colorscheme gotham
-" colorscheme monokai-phoenix
-" colorscheme night-owl
 
 " Operator mono adjustments
 hi htmlArg gui=italic
@@ -220,37 +218,117 @@ nnoremap \| :!fr<Space>
 " Type // in visual mode to find text that is selected
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
 " lightline
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'readonly',  'cocstatus', 'filename', 'modified' ] ]
   \ },
   \ 'colorscheme': 'iceberg',
   \ 'component_function': {
-  \   'gitbranch': 'gitbranch#name'
+  \   'cocstatus': 'coc#status'
   \ },
 \ }
 
-" ALE
-map <leader>g :ALEGoToDefinition<CR>
-map <leader>f :ALEFix<CR>
-map <leader>h :ALEHover<CR>
-map <leader>r :ALEFindReferences<CR>
-inoremap <silent> <C-X><C-O> <C-\><C-O>:ALEComplete<CR>
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_cpp_ccls_init_options = {
-\   'cache': {
-\       'directory': '/tmp/ccls/cache'
-\   }
-\ }
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 1
+" c++ syntax highlighting
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 
-" md-img-paste.vim keybindings
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-let g:mdip_imgdir = 'img'
+" syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+
+" coc.nvim
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" C(++) debugging
+" See https://neovim.io/doc/user/nvim_terminal_emulator.html
+" packadd termdebug
+let g:termdebug_popup = 0
+let g:termdebug_wide = 163
+" Default is ARM debugging
+" In the future, consider using https://github.com/embear/vim-localvimrc for
+" project specific settings
+let g:termdebugger = "arm-none-eabi-gdb"
+let g:termdebugger_program = "pio device monitor -b 38400"
+" Map ESC to exit terminal mode (it's interfering with fzf so we check
+" whether we're in fzf, see https://github.com/junegunn/fzf.vim/issues/544#issuecomment-457456166)
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+" Some debugging shortcuts
+nnoremap <silent> <leader>b :Break<CR>
+nnoremap <silent> <leader>bc :Clear<CR>
+nnoremap <silent> <leader>c :Continue<CR>

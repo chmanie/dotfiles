@@ -1,2 +1,5 @@
-let b:ale_linters = ['ccls', 'cpplint']
-let b:ale_fixers = ['clang-format']
+let g:clang_format#style_options = {
+            \ "IndentPPDirectives" : "BeforeHash"}
+
+" Formatting buffer.
+nnoremap <Leader>f :<C-u>ClangFormat<CR>
