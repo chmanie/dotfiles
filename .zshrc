@@ -58,16 +58,21 @@ export LANGUAGE=en_US.UTF-8
 
 ### Aliases ###
 alias serve='budo'
-alias l='lsd'
-alias ll='lsd -l'
-alias la='lsd -la'
-# git habit never die
+alias l='exa'
+alias ll='exa -l'
+alias la='exa -la'
+# git habits never die
 alias gst='gws'
 alias gd='git diff'
 alias gl='git log --topo-order --oneline --decorate --color --graph'
 alias glog='gl'
 # fuzzy find branch
 alias gcf='gco $(gb | fzf)'
+# fuzzy open a file with bat
+alias b='bat $(fzf)'
+# copy & paste galore!
+alias c='pbcopy'
+alias p='pbpaste'
 
 # find and replace in project
 fr () {
