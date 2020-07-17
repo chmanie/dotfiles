@@ -79,26 +79,16 @@ fr () {
  sd -i $1 $2 $(rg -l $1) 
 }
 
-[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
-if [ -S  ]; then
-    export GPG_AGENT_INFO
-    export SSH_AUTH_SOCK
-    export SSH_AGENT_PID
-else
-    eval 
-fi
-
 ### Other tools ###
-# set gpgsign
-alias gpgon="git config --global commit.gpgsign true"
-alias gpgoff="git config --global commit.gpgsign false"
-
-# Lazyness!
-alias ypl="yarn --pure-lockfile"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-alias loadnvm='[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# path
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH:/usr/local/sbin:$PATH"
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# Created by `userpath` on 2020-04-04 13:29:13
+export PATH="$PATH:/Users/chris/.local/bin"
