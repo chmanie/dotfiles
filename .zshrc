@@ -4,7 +4,7 @@
 
 ### Plugins ###
 
-## FZF
+# fzf
 source "$HOME/.fzf.zsh"
 # Super fast fzf search using fd!
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git" --type f'
@@ -31,9 +31,6 @@ source "$HOME/.zplugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin
 
 ## history search via substring
 source "$HOME/.zplugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh"
-# Up/down history search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
 
 ## emoji (alpha)
 # source "$HOME/dev/bash/emoji-in-the-shell/emoji-in-the-shell.zsh"
@@ -47,6 +44,12 @@ zstyle ':completion:*' menu select
 
 # Disable the super annoying CTRL+D logout
 setopt IGNORE_EOF
+
+# vi mode!
+bindkey -v
+# Up/down history search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # some language stuff
 export LC_ALL=en_US.UTF-8
