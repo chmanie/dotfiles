@@ -1,3 +1,4 @@
 .tmux/plugins/
 .netrwhist
 emojis
+.tmux/resurrect
