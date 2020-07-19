@@ -19,5 +19,80 @@
          "highlight": { "lsRanges" : true }
        }
     }
+  },
+  "diagnostic-languageserver.debug": true,
+  "diagnostic-languageserver.filetypes": {
+    "markdown": ["alex", "write-good"],
+    "cpp": ["cpplint"]
+  },
+  "diagnostic-languageserver.linters": {
+    "alex": {
+      "command": "alex",
+      "debounce": 200,
+      "isStderr": true,
+      "args": ["--stdin"],
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "alex.js",
+      "formatLines": 1,
+      "formatPattern": [
+        "^\\s*(\\d+):(\\d+)-(\\d+):(\\d+)\\s{2}([a-z]+)\\s{2}(.*?)\\s{2,}([a-z-]+)\\s{2,}([a-z-]+)$",
+        {
+          "line": 1,
+          "column": 2,
+          "endLine": 3,
+          "endColumn": 4,
+          "security" : 5,
+          "message": 6
+        }
+      ],
+      "securities" : {
+        "warning": "warning",
+        "error": "error"
+      }
+    },
+    "cpplint": {
+      "command": "cpplint",
+      "args": ["%file"],
+      "debounce": 200,
+      "isStderr": true,
+      "isStdout": false,
+      "sourceName": "cpplint",
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "formatPattern": [
+        "^[^:]+:(\\d+):(\\d+)?\\s+([^:]+?)\\s\\[(\\d)\\]$",
+        {
+          "line": 1,
+          "column": 2,
+          "message": 3,
+          "security": 4
+        }
+      ],
+      "securities": {
+        "0": "info",
+        "1": "warning",
+        "2": "warning",
+        "3": "warning",
+        "4": "error",
+        "5": "error"
+      }
+    }
+  },
+  "diagnostic-languageserver.formatters": {
+    "clang-format": {
+      "command": "clang-format"
+    },
+    "eslint": {
+      "command": "./node_modules/.bin/eslint",
+      "args": ["--fix"],
+      "rootPatterns": [".git"],
+      "isStderr": false,
+      "isStdout": true
+    }
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "cpp": "clang-format",
+    "typescript": "eslint"
   }
 }

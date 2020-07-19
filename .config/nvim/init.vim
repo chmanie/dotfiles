@@ -13,15 +13,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/iceberg.vim'
 " status bar
 Plug 'itchyny/lightline.vim'
-" Show git branch
-" Plug 'itchyny/vim-gitbranch'
 " Language stuff
 Plug 'pangloss/vim-javascript' 
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'rhysd/vim-clang-format'
-Plug 'vim-syntastic/syntastic'
 " Language server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -80,7 +77,7 @@ set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-set signcolumn=yes
+set signcolumn=no
 
 " Whitespace
 set wrap
@@ -162,6 +159,8 @@ let g:netrw_localrmdir="rm -r"
 let g:netrw_list_hide=netrw_gitignore#Hide()
 " Conveniently open netrw
 nnoremap <C-_> :Ex<CR>
+" Show .h files properly
+set suffixes-=.h
 
 " Color scheme (terminal)
 if exists('+termguicolors')
@@ -223,10 +222,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -263,6 +258,7 @@ xmap <leader>s <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+nmap <silent> <leader>f :Format<CR>
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -274,13 +270,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
-
-" syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_checkers = ['cpplint']
-let g:syntastic_c_checkers = ['cpplint']
-let g:syntastic_cpp_cpplint_exec = 'cpplint'
 
 " C(++) debugging
 " See https://neovim.io/doc/user/nvim_terminal_emulator.html
