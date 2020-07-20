@@ -7,6 +7,13 @@ filetype off
 " Plugins
 call plug#begin('~/.local/share/nvim/site/plugged')
 
+" @TODO Install those extensions via vim-plug
+" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#use-vims-plugin-manager-for-coc-extension
+" * coc-prettier 1.1.17 ~/.config/coc/extensions/node_modules/coc-prettier
+" * coc-eslint 1.2.7 ~/.config/coc/extensions/node_modules/coc-eslint
+" * coc-diagnostic 0.3.0 ~/.config/coc/extensions/node_modules/coc-diagnostic
+" * coc-tsserver 1.5.1 ~/.config/coc/extensions/node_modules/coc-tsserver
+
 " Properly navigate splits when in tmux
 Plug 'christoomey/vim-tmux-navigator'  
 " Color schemes
@@ -65,6 +72,11 @@ set encoding=utf-8
 
 " TextEdit might fail if hidden is not set.
 set hidden
+
+" Automatically detect file changes
+set autoread
+" Reload the file when enterin buffer
+au FocusGained,BufEnter * :silent! !
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -300,4 +312,3 @@ let g:lightline = {
   \   'cocstatus': 'coc#status'
   \ },
 \ }
-
