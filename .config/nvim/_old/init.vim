@@ -16,19 +16,16 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Properly navigate splits when in tmux
 Plug 'christoomey/vim-tmux-navigator'  
-" Color schemes
-Plug 'cocopon/iceberg.vim'
+" Color schema
+Plug 'srcery-colors/srcery-vim'
 " status bar
 Plug 'itchyny/lightline.vim'
 " Language stuff
-Plug 'pangloss/vim-javascript' 
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'jparise/vim-graphql'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'rhysd/vim-clang-format'
+Plug 'sheerun/vim-polyglot'
 " Language server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'rhysd/vim-clang-format'
 " Debugging
 Plug 'chmanie/termdebugx.nvim'
 " File exploring
@@ -41,12 +38,17 @@ Plug 'tpope/vim-surround'
 " Add comments using gcc and gc
 Plug 'tpope/vim-commentary'
 Plug 'suy/vim-context-commentstring'
+" Wiki / notes
+Plug 'vimwiki/vimwiki'
+Plug 'alok/notational-fzf-vim'
 " Open marked (macOS only)
 Plug 'itspriddle/vim-marked'
 " Paste images from clipboard into markdown
 Plug 'ferrine/md-img-paste.vim'
 " Color CSS colors
 Plug 'chrisbra/Colorizer'
+" Emoji!!!
+" Plug 'junegunn/vim-emoji'
 
 call plug#end()
 
@@ -181,7 +183,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-colorscheme iceberg
+colorscheme srcery
 
 " Font adjustments
 hi htmlArg gui=italic
@@ -301,14 +303,25 @@ nnoremap <silent> <leader>b :Break<CR>
 nnoremap <silent> <leader>bc :Clear<CR>
 nnoremap <silent> <leader>c :Continue<CR>
 
+" Auto-complete emoji
+set completefunc=emoji#complete
+
 " lightline
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'readonly',  'cocstatus', 'filename', 'modified' ] ]
   \ },
-  \ 'colorscheme': 'iceberg',
+  \ 'colorscheme': 'srcery',
   \ 'component_function': {
   \   'cocstatus': 'coc#status'
   \ },
 \ }
+
+" vimwiki and notes settings
+let g:vimwiki_list = [{'path': '~/Nextcloud/Notes',
+                      \ 'syntax': 'markdown', 'ext': '.md',
+                      \ 'index': 'Wiki'}]
+let g:vimwiki_global_ext = 0
+let g:nv_search_paths = ['~/Nextcloud/Notes']
+nnoremap <leader>e :NV<CR>

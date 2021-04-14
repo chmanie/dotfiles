@@ -1,0 +1,88 @@
+require 'packer-plugins'
+require 'treesitter'
+require 'lsp'
+require 'completion'
+require 'statusline'
+
+require('nvim-autopairs').setup()
+
+local cmd = vim.cmd
+local g = vim.g
+local set = vim.api.nvim_set_option
+local keymap = vim.api.nvim_set_keymap
+
+g.mapleader = ','
+g.auto_save = 1
+
+cmd 'syntax enable'
+cmd 'syntax on'
+
+set('number', true)
+set('compatible', false)
+set('filetype', 'on')
+set('modelines', 0)
+set('visualbell', true)
+set('encoding', 'utf-8')
+set('hidden', true)
+
+set('autoread', true)
+-- Reload the file when enterin buffer
+-- @TODO see https://github.com/neovim/neovim/pull/12378
+cmd('au FocusGained,BufEnter * :silent! !')
+
+set('backup', false)
+set('writebackup', false)
+set('updatetime', 300)
+set('signcolumn', 'no')
+set('wrap', true)
+set('textwidth', 80)
+set('formatoptions', 'tcqrn1')
+set('tabstop', 2)
+set('shiftwidth', 2)
+set('expandtab', true)
+set('shiftround', false)
+
+-- cursor motion
+set('scrolloff', 3)
+set('backspace', 'indent,eol,start')
+-- @TODO no idea how to do this in lua
+cmd 'set matchpairs+=<:>' -- use % to jump between pairs
+
+set('ttyfast', true) -- fast rendering
+set('re', 2) -- regex engine
+
+-- status bar
+set('laststatus', 2)
+set('showmode', false)
+set('showcmd', true)
+
+-- search stuff
+set('hlsearch', true)
+set('incsearch', true)
+set('ignorecase', false)
+set('smartcase', true)
+set('showmatch', true)
+keymap('', '<leader><space>', ':let @/=\'\'<cr>', { silent = true }) -- clear search
+set('grepprg', 'rg --vimgrep')
+-- Type // in visual mode to find text that is selected
+keymap('v', '//', 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>', { noremap = true, silent = true })
+
+-- file browsing
+-- free <C-l> in netrw (for tmux navigator)
+keymap('n', '<leader><leader>l', '<Plug>NetrwRefresh', {})
+-- Conveniently open netrw
+keymap('n', '<C-_>', ':Ex<CR>', { noremap = true })
+-- Show .h files properly
+cmd('set suffixes-=.h')
+
+cmd('set termguicolors')
+cmd('colorscheme srcery')
+
+-- italic colorscheme modifications
+cmd('hi htmlArg gui=italic')
+cmd('hi Comment gui=italic')
+cmd('hi Type    gui=italic')
+cmd('hi htmlArg cterm=italic')
+cmd('hi Comment cterm=italic')
+cmd('hi Type    cterm=italic')
+
