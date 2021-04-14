@@ -2,7 +2,15 @@ vim.cmd [[packadd nvim-lspconfig]]
 vim.cmd [[packadd nvim-compe]]
 vim.cmd [[packadd lspkind-nvim]]
 vim.cmd [[packadd snippets.nvim]]
+vim.cmd [[packadd neoformat]]
 
+local g = vim.g
+
+-- neoformat config
+g.neoformat_enabled_lua = {'luaformat'}
+vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>Neoformat<cr>', { noremap = true })
+
+-- nvim-lspconfig
 local nvim_lsp = require('lspconfig')
 
 function on_attach(client)
@@ -35,9 +43,9 @@ function on_attach(client)
 
     -- set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
-        buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
     elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+        buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>', opts)
     end
 end
 

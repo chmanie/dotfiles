@@ -1,12 +1,3 @@
-require 'packer-plugins'
-require 'treesitter'
-require 'lsp'
-require 'completion'
-require 'statusline'
-require 'ctrlp'
-
-require('nvim-autopairs').setup()
-
 local cmd = vim.cmd
 local g = vim.g
 local set = vim.api.nvim_set_option
@@ -14,6 +5,15 @@ local keymap = vim.api.nvim_set_keymap
 
 g.mapleader = ','
 g.auto_save = 1
+
+require 'pluginlist'
+require 'treesitter'
+require 'lsp'
+require 'completion'
+require 'statusline'
+require 'ctrlp'
+
+require('nvim-autopairs').setup()
 
 cmd 'syntax enable'
 cmd 'syntax on'
@@ -60,20 +60,24 @@ set('incsearch', true)
 set('ignorecase', false)
 set('smartcase', true)
 set('showmatch', true)
-keymap('', '<leader><space>', ':let @/=\'\'<cr>', { silent = true }) -- clear search
+keymap('', '<leader><space>', ':let @/=\'\'<cr>', {silent = true}) -- clear search
 set('grepprg', 'rg --vimgrep')
 -- Type // in visual mode to find text that is selected
-keymap('v', '//', 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>', { noremap = true, silent = true })
+keymap('v', '//', 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>',
+       {noremap = true, silent = true})
 
 -- free some keymaps (e.g. ctrl-p)
-keymap('n', 'j', 'gj', { noremap = true })
-keymap('n', 'k', 'gk', { noremap = true })
+keymap('n', 'j', 'gj', {noremap = true})
+keymap('n', 'k', 'gk', {noremap = true})
 
 -- file browsing
+g.netrw_banner = 0
+g.netrw_list_hide =
+    '.*\\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\\.\\=/\\=$'
 -- free <C-l> in netrw (for tmux navigator)
 keymap('n', '<leader><leader>l', '<Plug>NetrwRefresh', {})
 -- Conveniently open netrw
-keymap('n', '<C-_>', ':Ex<CR>', { noremap = true })
+keymap('n', '<C-_>', '<cmd>Ex<cr>', {noremap = true})
 -- Show .h files properly
 cmd('set suffixes-=.h')
 
@@ -87,4 +91,3 @@ cmd('hi Type    gui=italic')
 cmd('hi htmlArg cterm=italic')
 cmd('hi Comment cterm=italic')
 cmd('hi Type    cterm=italic')
-
