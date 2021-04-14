@@ -3,6 +3,7 @@ require 'treesitter'
 require 'lsp'
 require 'completion'
 require 'statusline'
+require 'ctrlp'
 
 require('nvim-autopairs').setup()
 
@@ -48,9 +49,6 @@ set('backspace', 'indent,eol,start')
 -- @TODO no idea how to do this in lua
 cmd 'set matchpairs+=<:>' -- use % to jump between pairs
 
-set('ttyfast', true) -- fast rendering
-set('re', 2) -- regex engine
-
 -- status bar
 set('laststatus', 2)
 set('showmode', false)
@@ -66,6 +64,10 @@ keymap('', '<leader><space>', ':let @/=\'\'<cr>', { silent = true }) -- clear se
 set('grepprg', 'rg --vimgrep')
 -- Type // in visual mode to find text that is selected
 keymap('v', '//', 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>', { noremap = true, silent = true })
+
+-- free some keymaps (e.g. ctrl-p)
+keymap('n', 'j', 'gj', { noremap = true })
+keymap('n', 'k', 'gk', { noremap = true })
 
 -- file browsing
 -- free <C-l> in netrw (for tmux navigator)
