@@ -14,6 +14,9 @@ require 'statusline'
 require 'ctrlp'
 
 require('nvim-autopairs').setup()
+require('telescope').setup {
+    extensions = {telenotes = {tn_note_dir = '~/Nextcloud/Notes'}}
+}
 
 cmd 'syntax enable'
 cmd 'syntax on'
@@ -27,7 +30,7 @@ set('encoding', 'utf-8')
 set('hidden', true)
 
 set('autoread', true)
--- Reload the file when enterin buffer
+-- Reload the file when entering buffer
 -- @TODO see https://github.com/neovim/neovim/pull/12378
 cmd('au FocusGained,BufEnter * :silent! !')
 
