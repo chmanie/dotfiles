@@ -12,6 +12,7 @@ require 'lsp'
 require 'completion'
 require 'statusline'
 require 'ctrlp'
+require 'zettel'
 
 require('nvim-autopairs').setup()
 require('telescope').setup {

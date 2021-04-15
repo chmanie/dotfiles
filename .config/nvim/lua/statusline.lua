@@ -1,6 +1,7 @@
+vim.cmd [[packadd galaxyline.nvim]]
+
 require'nvim-web-devicons'.setup()
 
-vim.cmd [[packadd galaxyline.nvim]]
 local gl = require('galaxyline')
 local utils = require('utils')
 local condition = require('galaxyline.condition')
@@ -164,7 +165,7 @@ gls.left[3] = {
         provider = get_current_file_name,
         condition = buffer_not_empty,
         highlight = {colors.fg, colors.section_bg},
-        separator = '', --'',
+        separator = '', -- '',
         separator_highlight = {colors.section_bg, colors.bg}
     }
 }
@@ -272,7 +273,7 @@ gls.right[7] = {
 gls.right[8] = {
     PerCent = {
         provider = 'LinePercent',
-        separator = '', --'',
+        separator = '', -- '',
         separator_highlight = {colors.blue, colors.bg},
         highlight = {colors.gray2, colors.blue}
     }
