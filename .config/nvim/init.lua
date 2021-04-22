@@ -18,6 +18,7 @@ require('nvim-autopairs').setup()
 require('telescope').setup {
     extensions = {telenotes = {tn_note_dir = '~/Nextcloud/Notes'}}
 }
+require('telescope').load_extension('fzy_native')
 
 cmd 'syntax enable'
 cmd 'syntax on'
@@ -38,7 +39,7 @@ cmd('au FocusGained,BufEnter * :silent! !')
 set('backup', false)
 set('writebackup', false)
 set('updatetime', 300)
-set('signcolumn', 'no')
+set('signcolumn', 'yes')
 set('wrap', true)
 set('textwidth', 80)
 set('formatoptions', 'tcqrn1')
@@ -51,7 +52,7 @@ set('shiftround', false)
 set('scrolloff', 3)
 set('backspace', 'indent,eol,start')
 -- @TODO no idea how to do this in lua
-cmd 'set matchpairs+=<:>' -- use % to jump between pairs
+cmd('set matchpairs+=<:>') -- use % to jump between pairs
 
 -- status bar
 set('laststatus', 2)
@@ -71,8 +72,8 @@ keymap('v', '//', 'y/\\V<C-R>=escape(@",\'/\')<CR><CR>',
        {noremap = true, silent = true})
 
 -- free some keymaps (e.g. ctrl-p)
-keymap('n', 'j', 'gj', {noremap = true})
-keymap('n', 'k', 'gk', {noremap = true})
+--[[ keymap('n', 'j', 'gj', {noremap = true})
+keymap('n', 'k', 'gk', {noremap = true}) ]]
 
 -- file browsing
 g.netrw_banner = 0

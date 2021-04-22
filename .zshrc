@@ -11,33 +11,30 @@ export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git" --type f'
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-## zsh-async (used by other plugins)
+# zsh-async (used by other plugins)
 source "$HOME/.zplugins/zsh-async/async.plugin.zsh"
 
-## pure shell
+# pure shell
 source "$HOME/.zplugins/pure/pure.zsh"
 
-## history settings
+# history settings
 source "$HOME/.zplugins/zimfw/modules/history/init.zsh"
 
-## git aliases
-source "$HOME/.zplugins/zimfw/modules/git/init.zsh"
+# git aliases
+ source "$HOME/.zplugins/zimfw/modules/git/init.zsh"
 
-## zsh autosuggestions
+# zsh autosuggestions
 source "$HOME/.zplugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-## syntax highlighting
+# syntax highlighting
 source "$HOME/.zplugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
-## history search via substring
+# history search via substring
 source "$HOME/.zplugins/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh"
-
-## emoji (alpha)
-# source "$HOME/dev/bash/emoji-in-the-shell/emoji-in-the-shell.zsh"
 
 ### Settings ###
 
-## Enable autocomplete
+# Enable autocomplete
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
@@ -61,6 +58,7 @@ alias serve='budo'
 alias l='exa'
 alias ll='exa -l'
 alias la='exa -la'
+alias :q='exit'
 # git habits never die
 alias gst='gws'
 alias gd='git diff'
@@ -73,6 +71,8 @@ alias b='bat $(fzf)'
 # copy & paste galore!
 alias c='pbcopy'
 alias p='pbpaste'
+# Lazy apps
+alias yd='youtube-dl'
 
 # find and replace in project
 fr () {
@@ -82,13 +82,39 @@ fr () {
 ### Other tools ###
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# path
+export PATH="/usr/local/sbin:$PATH"
+
+# pip should only run if there is a virtualenv currently activated
+
+# Created by `userpath` on 2020-04-04 13:29:13
+export PATH="$PATH:/Users/chris/.local/bin"
+
+# llvm
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+# STUPID PYTHON SHIT
+export PIP_REQUIRE_VIRTUALENV=true
+ 
+# commands to override pip restriction above.
+# use `gpip` or `gpip3` to force installation of
+# a package in the global python environment
+# Never do this! It is just an escape hatch.
+gpip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+gpip3(){
+   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+}
+
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-
-# Created by `userpath` on 2020-04-04 13:29:13
-export PATH="$PATH:/Users/chris/.local/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"

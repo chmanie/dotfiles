@@ -6,6 +6,9 @@ require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     use 'nvim-treesitter/nvim-treesitter'
     use 'neovim/nvim-lspconfig'
+    use 'nvim-lua/lsp_extensions.nvim'
+    use 'simrat39/rust-tools.nvim'
+    use 'onsails/lspkind-nvim'
     use 'hrsh7th/nvim-compe'
     use 'windwp/nvim-autopairs'
     use 'b3nj5m1n/kommentary'
@@ -13,10 +16,13 @@ require('packer').startup(function()
     use 'ryanoasis/vim-devicons'
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
+        requires = {
+            'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-fzy-native.nvim'
+        }
     }
-    use 'onsails/lspkind-nvim'
-    use 'norcalli/snippets.nvim'
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
     use 'srcery-colors/srcery-vim'
     use {
         'glepnir/galaxyline.nvim',
