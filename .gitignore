@@ -1,4 +1,4 @@
-.tmux/plugins/
 .netrwhist
-emojis
-.tmux/resurrect
+.zcompdump
+.zhistory
+.zsh_history
