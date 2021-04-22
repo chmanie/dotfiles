@@ -2,23 +2,23 @@
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
 [submodule ".zplugins/zsh-history-substring-search"]
-	path = .zplugins/zsh-history-substring-search
+	path = .config/zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
 [submodule ".zplugins/fast-syntax-highlighting"]
-	path = .zplugins/fast-syntax-highlighting
+	path = .config/zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
 [submodule ".zplugins/zimfw"]
-	path = .zplugins/zimfw
+	path = .config/zsh/plugins/zimfw
 	url = https://github.com/zimfw/zimfw.git
 [submodule ".zplugins/zsh-async"]
-	path = .zplugins/zsh-async
+	path = .config/zsh/plugins/zsh-async
 	url = https://github.com/mafredri/zsh-async.git
 [submodule ".zplugins/pure"]
-	path = .zplugins/pure
+	path = .config/zsh/plugins/pure
 	url = https://github.com/sindresorhus/pure.git
 [submodule ".zplugins/zsh-completions"]
-	path = .zplugins/zsh-completions
+	path = .config/zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
 [submodule ".zplugins/zsh-autosuggestions"]
-	path = .zplugins/zsh-autosuggestions
+	path = .config/zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
