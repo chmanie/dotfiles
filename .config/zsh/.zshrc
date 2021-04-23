@@ -21,7 +21,7 @@ source "$HOME/.config/zsh/plugins/pure/pure.zsh"
 source "$HOME/.config/zsh/plugins/zimfw/modules/history/init.zsh"
 
 # git aliases
- source "$HOME/.config/zsh/plugins/zimfw/modules/git/init.zsh"
+source "$HOME/.config/zsh/plugins/zimfw/modules/git/init.zsh"
 
 # zsh autosuggestions
 source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
