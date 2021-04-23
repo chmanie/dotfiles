@@ -7,13 +7,26 @@ vim.cmd [[packadd neoformat]]
 local g = vim.g
 local keymap = vim.api.nvim_set_keymap
 
+-- nvim-lspconfig
+local nvim_lsp = require('lspconfig')
+
 -- neoformat config
 g.neoformat_enabled_lua = {'luaformat'}
 vim.api
     .nvim_set_keymap('n', '<leader>f', '<cmd>Neoformat<cr>', {noremap = true})
 
--- nvim-lspconfig
-local nvim_lsp = require('lspconfig')
+-- completion menu symbols
+require('lspkind').init()
+
+-- define prettier signs
+vim.fn.sign_define("LspDiagnosticsSignError",
+                   {text = "", texthl = "LspDiagnosticsError"})
+vim.fn.sign_define("LspDiagnosticsSignWarning",
+                   {text = "", texthl = "LspDiagnosticsWarning"})
+vim.fn.sign_define("LspDiagnosticsSignInformation",
+                   {text = "", texthl = "LspDiagnosticsInformation"})
+vim.fn.sign_define("LspDiagnosticsSignHint",
+                   {text = "", texthl = "LspDiagnosticsHint"})
 
 -- rust-tools
 require('rust-tools').setup()
@@ -31,6 +44,7 @@ keymap('s', '<S-Tab>',
        "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
        {expr = true})
 
+-- define attach function when loading buffer
 function on_attach(client)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -92,6 +106,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                  {virtual_text = true, signs = true, update_in_insert = false})
 
+-- setup language servers
 nvim_lsp.tsserver.setup({on_attach = on_attach})
 
 nvim_lsp.rust_analyzer.setup({
@@ -109,6 +124,3 @@ nvim_lsp.clangd.setup({
 })
 
 nvim_lsp.pyright.setup({on_attach = on_attach})
-
--- completion menu symbols
-require('lspkind').init()

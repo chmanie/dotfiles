@@ -20,8 +20,8 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzy_native')
 
-cmd 'syntax enable'
-cmd 'syntax on'
+cmd('syntax enable')
+cmd('syntax on')
 
 set('number', true)
 set('compatible', false)
@@ -39,7 +39,7 @@ cmd('au FocusGained,BufEnter * :silent! !')
 set('backup', false)
 set('writebackup', false)
 set('updatetime', 300)
-set('signcolumn', 'yes')
+set('signcolumn', 'number')
 set('wrap', true)
 set('textwidth', 80)
 set('formatoptions', 'tcqrn1')
@@ -79,25 +79,27 @@ keymap('n', 'k', 'gk', {noremap = true}) ]]
 g.netrw_banner = 0
 g.netrw_list_hide =
     '.*\\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\\.\\=/\\=$'
+-- Conveniently open netrw
+keymap('n', '<C-]>', '<cmd>Ex<cr>', {noremap = true})
 -- free <C-l> in netrw (for tmux navigator)
 keymap('n', '<leader><leader>l', '<Plug>NetrwRefresh', {})
--- Conveniently open netrw
-keymap('n', '<C-_>', '<cmd>Ex<cr>', {noremap = true})
 -- Show .h files properly
 cmd('set suffixes-=.h')
 
 -- color scheme
-g.tokyonight_style = "night"
+g.tokyonight_style = 'night'
 g.tokyonight_italic_functions = true
-g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+g.tokyonight_sidebars = {'qf', 'vista_kind', 'terminal', 'packer'}
 
 cmd('set termguicolors')
 cmd [[colorscheme tokyonight]]
 
+-- @Note: not needed for tokyo night. Enable again if using different
+-- colorscheme
 -- italic colorscheme modifications
-cmd('hi htmlArg gui=italic')
+--[[ cmd('hi htmlArg gui=italic')
 cmd('hi Comment gui=italic')
 cmd('hi Type    gui=italic')
 cmd('hi htmlArg cterm=italic')
 cmd('hi Comment cterm=italic')
-cmd('hi Type    cterm=italic')
+cmd('hi Type    cterm=italic') ]]

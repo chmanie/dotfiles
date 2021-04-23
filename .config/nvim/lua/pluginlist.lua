@@ -36,7 +36,6 @@ require('packer').startup(function()
     -- use 'akinsho/nvim-bufferline.lua'
     -- use '907th/vim-auto-save'
     -- use 'norcalli/nvim-colorizer.lua'
-    -- use 'sbdchd/neoformat'
     -- use 'alvan/vim-closetag'
     -- use 'tweekmonster/startuptime.vim'
     -- use 'nvim-telescope/telescope-media-files.nvim'
