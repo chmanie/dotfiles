@@ -23,10 +23,9 @@ require('packer').startup(function()
     }
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
-    use 'srcery-colors/srcery-vim'
+    use 'folke/tokyonight.nvim'
     use {
-        'glepnir/galaxyline.nvim',
-        branch = 'main',
+        'hoob3rt/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
     use 'sbdchd/neoformat'

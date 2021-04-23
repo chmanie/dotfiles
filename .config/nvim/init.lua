@@ -86,8 +86,13 @@ keymap('n', '<C-_>', '<cmd>Ex<cr>', {noremap = true})
 -- Show .h files properly
 cmd('set suffixes-=.h')
 
+-- color scheme
+g.tokyonight_style = "night"
+g.tokyonight_italic_functions = true
+g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+
 cmd('set termguicolors')
-cmd('colorscheme srcery')
+cmd [[colorscheme tokyonight]]
 
 -- italic colorscheme modifications
 cmd('hi htmlArg gui=italic')
