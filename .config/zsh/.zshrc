@@ -2,6 +2,7 @@
 # User configuration sourced by interactive shells
 #
 
+
 ### Plugins ###
 
 # # fzf
@@ -90,3 +91,6 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 # Rust
 source "$HOME/.cargo/env"
+
+# Run tmux when it's not running already
+[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}

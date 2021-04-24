@@ -1,10 +1,15 @@
 local cmd = vim.cmd
 local g = vim.g
 local set = vim.api.nvim_set_option
+local wset = vim.api.nvim_win_set_option
 local keymap = vim.api.nvim_set_keymap
 
 g.mapleader = ','
-g.auto_save = 1
+
+-- color scheme
+g.tokyonight_style = 'night'
+g.tokyonight_italic_functions = true
+g.tokyonight_sidebars = {'qf', 'vista_kind', 'terminal', 'packer'}
 
 require 'pluginlist'
 require 'treesitter'
@@ -15,15 +20,8 @@ require 'ctrlp'
 require 'zettel'
 
 require('nvim-autopairs').setup()
-require('telescope').setup {
-    extensions = {telenotes = {tn_note_dir = '~/Nextcloud/Notes'}}
-}
-require('telescope').load_extension('fzy_native')
 
-cmd('syntax enable')
-cmd('syntax on')
-
-set('number', true)
+wset(0, 'number', true)
 set('compatible', false)
 set('filetype', 'on')
 set('modelines', 0)
@@ -86,13 +84,8 @@ keymap('n', '<leader><leader>l', '<Plug>NetrwRefresh', {})
 -- Show .h files properly
 cmd('set suffixes-=.h')
 
--- color scheme
-g.tokyonight_style = 'night'
-g.tokyonight_italic_functions = true
-g.tokyonight_sidebars = {'qf', 'vista_kind', 'terminal', 'packer'}
-
 cmd('set termguicolors')
-cmd [[colorscheme tokyonight]]
+cmd('colorscheme tokyonight')
 
 -- @Note: not needed for tokyo night. Enable again if using different
 -- colorscheme
