@@ -4,14 +4,20 @@ local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 -- using { } when using a different branch of the plugin or loading the plugin with certain commands
 require('packer').startup(function()
     use 'wbthomason/packer.nvim'
+
+    use 'windwp/nvim-autopairs'
+    use 'blackCauldron7/surround.nvim'
+    use 'b3nj5m1n/kommentary'
+
     use 'nvim-treesitter/nvim-treesitter'
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/lsp_extensions.nvim'
     use 'simrat39/rust-tools.nvim'
     use 'onsails/lspkind-nvim'
+    -- use 'nvim-lua/completion-nvim'
     use 'hrsh7th/nvim-compe'
-    use 'windwp/nvim-autopairs'
-    use 'b3nj5m1n/kommentary'
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'jose-elias-alvarez/nvim-lsp-ts-utils'
     use 'christoomey/vim-tmux-navigator'
     use 'ryanoasis/vim-devicons'
     use {
@@ -29,7 +35,14 @@ require('packer').startup(function()
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
     use 'sbdchd/neoformat'
+    use 'sakshamgupta05/vim-todo-highlight'
+
     use 'vimwiki/vimwiki'
+    use 'ferrine/md-img-paste.vim'
+    use 'itspriddle/vim-marked'
+    -- use 'mfussenegger/nvim-dap'
+    -- use { 'chmanie/nvim-dap-rust' }
+    use 'chmanie/termdebugx.nvim'
 
     -- use 'kyazdani42/nvim-tree.lua'
     -- use 'lewis6991/gitsigns.nvim'

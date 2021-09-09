@@ -9,7 +9,7 @@ g.mapleader = ','
 -- color scheme
 g.tokyonight_style = 'night'
 g.tokyonight_italic_functions = true
-g.tokyonight_sidebars = {'qf', 'vista_kind', 'terminal', 'packer'}
+g.tokyonight_sidebars = {'terminal', 'packer'}
 
 require 'pluginlist'
 require 'treesitter'
@@ -20,6 +20,7 @@ require 'ctrlp'
 require 'zettel'
 
 require('nvim-autopairs').setup()
+require('surround').setup({})
 
 wset(0, 'number', true)
 set('compatible', false)
@@ -86,6 +87,23 @@ cmd('set suffixes-=.h')
 
 cmd('set termguicolors')
 cmd('colorscheme tokyonight')
+
+-- terminal-debug
+g.termdebug_popup = 0
+g.termdebug_wide = 163
+g.termdebugger = 'arm-none-eabi-gdb'
+-- g.termdebugger_program = "tio -b 115200 /dev/cu.usbmodem1433203"
+g.termdebugger_program = "openocd"
+keymap('n', '<leader>d', ':Termdebug<cr>', {noremap = true})
+keymap('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
+keymap('n', '<leader>b', ':Break<cr>', {noremap = true, silent = true})
+keymap('n', '<leader>bc', ':Clear<cr>', {noremap = true, silent = true})
+keymap('n', '<leader>c', ':Continue<cr>', {noremap = true, silent = true})
+keymap('n', '<leader>g', ':Evaluate<cr>', {noremap = true})
+
+-- for ferrine/md-img-paste.vim
+cmd(
+    'autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>');
 
 -- @Note: not needed for tokyo night. Enable again if using different
 -- colorscheme

@@ -87,6 +87,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chris/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
+  ["md-img-paste.vim"] = {
+    loaded = true,
+    path = "/Users/chris/.local/share/nvim/site/pack/packer/start/md-img-paste.vim"
+  },
   neoformat = {
     loaded = true,
     path = "/Users/chris/.local/share/nvim/site/pack/packer/start/neoformat"
@@ -127,6 +131,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/chris/.local/share/nvim/site/pack/packer/start/rust-tools.nvim"
   },
+  ["surround.nvim"] = {
+    loaded = true,
+    path = "/Users/chris/.local/share/nvim/site/pack/packer/start/surround.nvim"
+  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/chris/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
@@ -134,6 +142,10 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/chris/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["termdebugx.nvim"] = {
+    loaded = true,
+    path = "/Users/chris/.local/share/nvim/site/pack/packer/start/termdebugx.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,
