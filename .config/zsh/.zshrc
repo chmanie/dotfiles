@@ -92,5 +92,5 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Rust
 source "$HOME/.cargo/env"
 
-# Run tmux when it's not running already
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+# Run tmux when it's not running already (and is installed)
+[ -z "$TMUX"  ] && [ -f "$HOME/.config/tmux/tmux.conf" ] && { tmux attach || exec tmux new-session && exit;}
