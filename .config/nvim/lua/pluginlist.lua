@@ -14,10 +14,14 @@ require('packer').startup(function()
     use 'nvim-lua/lsp_extensions.nvim'
     use 'simrat39/rust-tools.nvim'
     use 'onsails/lspkind-nvim'
-    -- use 'nvim-lua/completion-nvim'
     use 'hrsh7th/nvim-compe'
-    use 'jose-elias-alvarez/null-ls.nvim'
-    use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+    use {
+      'jose-elias-alvarez/nvim-lsp-ts-utils',
+      requires = {
+        'jose-elias-alvarez/null-ls.nvim',
+        'nvim-lua/plenary.nvim',
+      }
+    }
     use 'christoomey/vim-tmux-navigator'
     use 'ryanoasis/vim-devicons'
     use {
