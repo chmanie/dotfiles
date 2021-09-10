@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show drun -G
 
 ### Output configuration
 #
@@ -205,7 +205,8 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    status_command while ~/.config/sway/status.sh; do sleep 10; done
+    # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -215,7 +216,9 @@ bar {
 }
 
 input type:keyboard {
-   xkb_options "caps:escape" 
+    xkb_options "caps:escape" 
+    repeat_delay 200
+    repeat_rate 30
 }
 
 input type:touchpad {
@@ -227,5 +230,7 @@ input type:touchpad {
 output 'Apple Computer Inc Color LCD 0x00000000' scale 1.5
 
 focus_follows_mouse no
+
+font pango: MonoLisa Nerd Font Mono Light 11
 
 include /etc/sway/config.d/*
