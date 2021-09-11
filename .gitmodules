@@ -28,3 +28,6 @@
 [submodule ".config/tmux/plugins/tmux-spotify"]
 	path = .config/tmux/plugins/tmux-spotify
 	url = https://github.com/robhurring/tmux-spotify
+[submodule ".config/zsh/plugins/sox-tricks"]
+	path = .config/zsh/plugins/sox-tricks
+	url = https://github.com/madskjeldgaard/sox-tricks.git

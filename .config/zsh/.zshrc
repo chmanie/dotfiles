@@ -72,8 +72,15 @@ alias b='bat $(fzf)'
 # copy & paste galore!
 alias c='pbcopy'
 alias p='pbpaste'
-# Lazy apps
+# apps
+alias v='nvim'
+alias vi='nvim'
 alias yd='youtube-dl'
+# load sox-tricks (https://github.com/madskjeldgaard/sox-tricks, requires bash)
+alias soxtricks='bash --init-file ~/.config/zsh/plugins/sox-tricks/.sox_tricks'
+# lazy load version managers
+alias loadpyenv='eval "$(pyenv init -)"'
+alias loadnvm='export NVM_DIR="$HOME/.config//nvm" && source "$NVM_DIR/nvm.sh"'
 
 # find and replace in project
 fr () {
@@ -89,7 +96,7 @@ export PATH="$PATH:/Users/chris/.local/bin"
 # llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-# Rust
+# rust
 source "$HOME/.cargo/env"
 
 # Run tmux when it's not running already (and is installed)
