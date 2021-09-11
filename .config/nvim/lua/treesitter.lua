@@ -5,6 +5,7 @@ ts_config.setup {
         'c', 'cpp', 'css', 'bash', 'cpp', 'html', 'javascript', 'lua', 'rust',
         'toml', 'tsx', 'typescript'
     },
-    highlight = {enable = true, use_languagetree = true}
-    -- indent = {enable = true}
+    highlight = {enable = true, use_languagetree = true},
+    indent = {enable = true},
+    autopairs = {enable = true}
 }

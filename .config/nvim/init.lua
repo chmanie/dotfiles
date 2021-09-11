@@ -15,11 +15,11 @@ require 'pluginlist'
 require 'treesitter'
 require 'lsp'
 require 'completion'
+require 'autopairs'
 require 'statusline'
 require 'ctrlp'
 require 'zettel'
 
-require('nvim-autopairs').setup()
 require('surround').setup({})
 
 wset(0, 'number', true)
@@ -42,8 +42,8 @@ set('signcolumn', 'number')
 set('wrap', true)
 set('textwidth', 80)
 set('formatoptions', 'tcqrn1')
-set('tabstop', 2)
-set('shiftwidth', 2)
+set('tabstop', 4)
+set('shiftwidth', 4)
 set('expandtab', true)
 set('shiftround', false)
 
