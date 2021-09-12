@@ -41,7 +41,7 @@ nvim_lsp.tsserver.setup {
         buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<cr>', opts)
         buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
         buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-        buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>',
+        buf_set_keymap('n', 'gk', '<cmd>lua vim.lsp.buf.signature_help()<cr>',
                        opts)
         buf_set_keymap('n', '<leader>wa',
                        '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', opts)
