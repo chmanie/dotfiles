@@ -76,11 +76,9 @@ alias p='pbpaste'
 alias v='nvim'
 alias vi='nvim'
 alias yd='youtube-dl'
-# load sox-tricks (https://github.com/madskjeldgaard/sox-tricks, requires bash)
-alias soxtricks='bash --init-file ~/.config/zsh/plugins/sox-tricks/.sox_tricks'
 # lazy load version managers
 alias loadpyenv='eval "$(pyenv init -)"'
-alias loadnvm='export NVM_DIR="$HOME/.config//nvm" && source "$NVM_DIR/nvm.sh"'
+alias loadnvm='export NVM_DIR="/usr/share/nvm" && source "$NVM_DIR/nvm.sh"'
 
 # find and replace in project
 fr () {
@@ -88,8 +86,7 @@ fr () {
 }
 
 # path
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:/Users/chris/.local/bin"
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 ### Other tools ###
 
